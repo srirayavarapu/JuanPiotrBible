@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/ic_home"
+            android:title="@string/home"
+            android:iconTint="@color/black"
+            />
+
+        <!--<item
+            android:id="@+id/books_1"
+            android:icon="@drawable/ic_bible__1"
+            android:title="@string/OT"
+            android:iconTint="@color/black"
+            />
+
+        <item
+            android:id="@+id/books_2"
+            android:icon="@drawable/ic_bible__1"
+            android:title="@string/NT"
+            android:iconTint="@color/black"/>-->
+
+        <!--<item
+            android:id="@+id/last_reading"
+            android:icon="@drawable/ic_last_reading"
+            android:title="@string/Back_to_Last_reading"
+            android:iconTint="@color/black"/>-->
+
+        <!--<item
+            android:id="@+id/search"
+            android:icon="@drawable/ic_search"
+            android:title="@string/Search_bible"
+            android:iconTint="@color/black"/>-->
+
+        <item
+            android:id="@+id/favorite"
+            android:icon="@drawable/ic_favorite"
+            android:title="@string/Favorite"
+            android:iconTint="@color/black"/>
+
+        <item
+            android:id="@+id/note"
+            android:icon="@drawable/ic_note"
+            android:title="@string/Note"
+            android:iconTint="@color/black"/>
+
+        <item
+            android:id="@+id/highlighted"
+            android:visible="false"
+            android:icon="@drawable/ic_highlight"
+            android:title="@string/Highlighted_verses"
+            android:iconTint="@color/black"/>
+
+        <!--<item
+            android:id="@+id/subscribe"
+            android:icon="@drawable/ic_baseline_subscriptions_24"
+            android:title="@string/Subscribe"
+            android:iconTint="@color/black"/>-->
+
+<!--        <item-->
+<!--            android:id="@+id/website"-->
+<!--            android:icon="@drawable/ic_goto_web"-->
+<!--            android:title="@string/goto_website"-->
+<!--            android:iconTint="@color/black"/>-->
+
+        <item
+            android:id="@+id/share"
+            android:icon="@drawable/ic_share"
+            android:title="@string/Share_This_App"
+            android:iconTint="@color/black"/>
+
+        <item
+            android:id="@+id/rate"
+            android:icon="@drawable/ic_rate"
+            android:title="@string/rate_this_app"
+            android:iconTint="@color/black"/>
+
+        <item
+            android:id="@+id/moreApps"
+            android:icon="@drawable/ic_more_apps"
+            android:title="@string/more_apps"
+            android:iconTint="@color/black"/>
+
+        <item
+            android:id="@+id/myMusic"
+            android:icon="@drawable/ic_my_music"
+            android:title="@string/my_music"
+            android:iconTint="@color/black"/>
+
+<!--        <item -->
+<!--            android:id="@+id/moreApps"-->
+<!--            android:icon="@drawable/ic_more_apps"-->
+<!--            android:title="@string/More_Apps"-->
+<!--            android:iconTint="@color/black"/>-->
+
+    </group>
+
+</menu>

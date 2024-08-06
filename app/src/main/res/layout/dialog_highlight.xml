@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/gotoFav"
+            android:fontFamily="@font/roboto_slab_bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            android:padding="20dp"
+            android:text="@string/Goto_this_Note"
+            android:textColor="?attr/textColor"
+            android:textSize="18sp"
+            app:drawableStartCompat="@drawable/ic_go_to_note" />
+
+        <TextView
+            android:id="@+id/deleteFav"
+            android:fontFamily="@font/roboto_slab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            android:padding="20dp"
+            android:text="@string/remove_highlight"
+            android:textColor="?attr/textColor"
+            android:textSize="18sp"
+            app:drawableStartCompat="@drawable/ic_delete" />
+
+        <TextView
+            android:id="@+id/copyFav"
+            android:fontFamily="@font/roboto_slab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            android:padding="20dp"
+            android:text="@string/Copy_this_Verse"
+            android:textColor="?attr/textColor"
+            android:textSize="18sp"
+            app:drawableStartCompat="@drawable/ic_copy" />
+
+        <TextView
+            android:id="@+id/shareFav"
+            android:fontFamily="@font/roboto_slab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            android:padding="20dp"
+            android:text="@string/Share_this_Verse"
+            android:textColor="?attr/textColor"
+            android:textSize="18sp"
+            app:drawableStartCompat="@drawable/ic_share" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

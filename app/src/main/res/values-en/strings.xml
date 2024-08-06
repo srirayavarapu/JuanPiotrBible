@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Santa Biblia Reina Valera</string>
+    <string name="ad_attribution">Ad</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="home">Home</string>
+    <string name="Favorite">Favorite</string>
+    <string name="Note">Note</string>
+    <string name="Highlight">Highlight</string>
+    <string name="Highlighted_verses">Highlighted Verses</string>
+    <string name="Share_This_App">Share This App</string>
+    <string name="rate_this_app">Rate this app</string>
+    <string name="more_apps">More Apps</string>
+    <string name="my_music">My Music</string>
+    <string name="search">Search</string>
+    <string name="Add_to_Favorites">Add to Favorites</string>
+    <string name="install">Install \n</string>
+    <string name="google_play_app_url">https://play.google.com/store/apps/details?id=</string>
+    <string name="select_option">Select Option</string>
+    <string name="from_playstore">\n from playstore: \n</string>
+    <string name="OT">OLD TESTAMENT</string>
+    <string name="NT">NEW TESTAMENT</string>
+    <string name="capitulo_s">chapter(s)</string>
+    <string name="unhighlight_this_verse">Unhighlight this verse</string>
+    <string name="Highlight_this_Verse">Highlight this Verse</string>
+    <string name="Add_note_to_verse">Add note to verse</string>
+    <string name="Copy_this_Verse">Copy this Verse</string>
+    <string name="Share_this_Verse">Share this Verse</string>
+    <string name="review_submitted_error">Something went Wrong, Please try again!</string>
+    <string name="Added_to_Favorites">Added to Favorites!</string>
+    <string name="note_updated">Note Updated</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="verse_copy_ok">Verse copy successfully</string>
+    <string name="bible_verse_share">"Bible Verse "</string>
+    <string name="no_zoom_message">You cannot to zoom in more.</string>
+    <string name="no_zoom_out">You cannot to zoom out more.</string>
+    <string name="no_more_chapters">No more chapters available</string>
+    <string name="buffering">Buffering…</string>
+    <string name="remove_highlight">Remove Highlight</string>
+    <string name="Goto_this_Note">Go to this Verse</string>
+    <string name="want_to_remove_highlight">Do you want to remove highlight from this verse?</string>
+    <string name="want_to_remove_verse_fav">Do you want to remove this Verse from favorite?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="Edit_this_Note">Edit this Note</string>
+    <string name="Delete_this_Note">Delete this Note</string>
+    <string name="want_to_remove_note">Do you want to remove this Verse from Notes?</string>
+    <string name="remove_from_favorites">Removed from favorites</string>
+    <string name="book">Book</string>
+    <string name="nt">NT</string>
+    <string name="ot">OT</string>
+    <string name="all">All</string>
+    <string name="Search">Search</string>
+</resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#AB4B56</color>
+    <color name="purple_500">#961e2c</color>
+    <color name="purple_700">#871B27</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="TBlack">#08102B</color>
+    <color name="TWhite">#FFFDFC</color>
+
+    <color name="main">#961e2c</color>
+
+    <color name="text_color">#ff173e58</color>
+    <color name="white_smoke">#F2F2F2</color>
+    <color name="black_smoke">#2C2C2C</color>
+    <color name="alice_blue">#E6F2FF</color>
+    <color name="alice_blue_black">#07509F</color>
+    <color name="quartz">#E0E0EB</color>
+    <color name="quartz_black">#4F4F6C</color>
+    <color name="light_cyan">#CCFFFF</color>
+    <color name="light_cyan_black">#1A4242</color>
+    <color name="blue_romance">#CCFFCC</color>
+    <color name="blue_romance_black">#1B531B</color>
+    <color name="selago">#FFE6FF</color>
+    <color name="selago_black">#513951</color>
+    <color name="maroon">#DC0000</color>
+
+    <color name="tabLayout_color_black">#676666</color>
+    <color name="tabLayout_color_white">#E1E0E0</color>
+
+    <color name="grid_color_black">#333333</color>
+    <color name="grid_color_white">#F7F6F3</color>
+
+    <color name="gnt_test_background_color">#00F4F4F4</color>
+    <color name="gnt_test_background_color_2">#00A3A3A3</color>
+    <color name="gnt_black">#000000</color>
+    <color name="gnt_white">#FFFFFF</color>
+    <color name="gnt_red">#FF0000</color>
+    <color name="gnt_green">#00FF00</color>
+    <color name="gnt_blue">#4285f4</color>
+    <color name="gnt_ad_green">#3A6728</color>
+    <color name="gnt_gray">#808080</color>
+    <color name="gnt_outline">#E0E0E0</color>
+</resources>

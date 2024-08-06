@@ -1,0 +1,29 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Appopenads" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="textColor">@color/white</item>
+        <item name="tabLayoutColor">@color/tabLayout_color_black</item>
+
+        <item name="highlight_one">@color/black_smoke</item>
+        <item name="highlight_two">@color/alice_blue_black</item>
+        <item name="highlight_three">@color/quartz_black</item>
+        <item name="highlight_four">@color/light_cyan_black</item>
+        <item name="highlight_five">@color/blue_romance_black</item>
+        <item name="highlight_six">@color/selago_black</item>
+    </style>
+
+    <style name="navTextFont" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/roboto_slab</item>
+    </style>
+</resources>

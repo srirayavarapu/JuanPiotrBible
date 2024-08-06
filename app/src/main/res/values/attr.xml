@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="textColor" format="color"/>
+
+    <attr name="highlight_one" format="color"/>
+    <attr name="highlight_two" format="color"/>
+    <attr name="highlight_three" format="color"/>
+    <attr name="highlight_four" format="color"/>
+    <attr name="highlight_five" format="color"/>
+    <attr name="highlight_six" format="color"/>
+
+    <attr name="tabLayoutColor" format="color"/>
+    <declare-styleable name="TemplateView">
+        <attr name="gnt_template_type" format="reference" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,78 @@
+<resources>
+    <string name="app_name">Biblia Reina Valera</string>
+
+    <!--    GOOGLE ADS PRODUCTION-->
+    <string name="admob_app_id" translatable="false">ca-app-pub-8465263282224422~6979230956</string>
+    <string name="admob_interstitial_id" translatable="false">ca-app-pub-8465263282224422/5757842147</string>
+    <string name="admob_banner_id" translatable="false">ca-app-pub-8465263282224422/8384005482</string>
+    <string name="admob_native_id" translatable="false">ca-app-pub-8465263282224422/5184838875</string>
+
+    <!--    Test Ads-->
+<!--    <string name="admob_app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>-->
+<!--    <string name="admob_interstitial_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>-->
+<!--    <string name="admob_banner_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>-->
+<!--    <string name="admob_native_id" translatable="false">ca-app-pub-3940256099942544/2247696110</string>-->
+
+
+
+    <string name="ad_attribution">Ad</string>
+
+    <!--FB ID-->
+    <!--380658779208132-->
+    <string name="facebook_app_id" translatable="false">450052809102498</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="home">Inicio</string>
+    <string name="Favorite">Favoritos</string>
+    <string name="Highlight">Destacar</string>
+    <string name="Note">Notas</string>
+    <string name="Highlighted_verses">Versos destacados</string>
+    <string name="Share_This_App">Comparte esta aplicación</string>
+    <string name="rate_this_app">Califica esta aplicación</string>
+    <string name="more_apps">Más aplicaciones</string>
+    <string name="my_music">Mi música</string>
+    <string name="search">Buscar</string>
+    <string name="Add_to_Favorites">Agregar a los favoritos</string>
+    <string name="install">Instala La Biblia en Español, la puedes descargar gratis aquí en la tienda oficial de Google 100% libre de virus \n</string>
+    <string name="google_play_app_url">https://play.google.com/store/apps/details?id=</string>
+    <string name="more_apps_url" translatable="false">https://dream-apps.pl/</string>
+    <string name="my_music_url" translatable="false">https://hypeddit.com/piotrwosinekjoimusic/ipromisebeagoodfriend</string>
+    <string name="select_option">Seleccionar opción</string>
+    <string name="from_playstore"> \n</string>
+    <string name="OT">VIEJO TESTAMENTO</string>
+    <string name="NT">NUEVO TESTAMENTO</string>
+    <string name="capitulo_s">capitulo(s)</string>
+    <string name="unhighlight_this_verse">Destaca este verso</string>
+    <string name="Highlight_this_Verse">Resalta este versículo</string>
+    <string name="Add_note_to_verse">Agregar nota al verso</string>
+    <string name="Copy_this_Verse">Copia este versículo</string>
+    <string name="Share_this_Verse">Comparte este versículo</string>
+    <string name="review_submitted_error">¡Algo salió mal. Por favor, vuelva a intentarlo! </string>
+    <string name="Added_to_Favorites">Añadido a favoritos!</string>
+    <string name="note_updated">Nota actualizada</string>
+    <string name="save">Salvar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="verse_copy_ok">Verse copiar correctamente</string>
+    <string name="bible_verse_share">Versículo de la Biblia </string>
+    <string name="no_zoom_message">No se puede acercar más.</string>
+    <string name="no_zoom_out">No se puede alejar más.</string>
+    <string name="no_more_chapters">No hay más capítulos disponibles</string>
+    <string name="buffering">Almacenando en búfer…</string>
+    <string name="remove_highlight">Eliminar resaltado</string>
+    <string name="Goto_this_Note">Ve a este versículo</string>
+    <string name="want_to_remove_highlight">¿Quiere quitar el resaltado de este versículo?</string>
+    <string name="want_to_remove_verse_fav">¿Quieres eliminar este verso de favoritos?</string>
+    <string name="yes">sí</string>
+    <string name="no">No</string>
+    <string name="Edit_this_Note">Editar esta nota</string>
+    <string name="Delete_this_Note">Eliminar esta nota</string>
+    <string name="want_to_remove_note">¿Quieres eliminar este versículo de Notes?</string>
+    <string name="remove_from_favorites">Quitado de favoritos</string>
+    <string name="book">Libro</string>
+    <string name="nt">Nuevo Testamento</string>
+    <string name="ot">DESDE</string>
+    <string name="all">Todos</string>
+    <string name="Search">Buscar</string>
+</resources>

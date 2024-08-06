@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/gotoNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:fontFamily="@font/roboto_slab"
+            android:text="@string/Goto_this_Note"
+            android:textColor="?attr/textColor"
+            android:textSize="18sp"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            app:drawableStartCompat="@drawable/ic_go_to_note" />
+
+        <TextView
+            android:id="@+id/editNote"
+            android:fontFamily="@font/roboto_slab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:text="@string/Edit_this_Note"
+            android:textColor="?attr/textColor"
+            android:gravity="center_vertical"
+            android:textSize="18sp"
+            android:drawablePadding="20dp"
+            app:drawableStartCompat="@drawable/ic_edit" />
+
+        <TextView
+            android:id="@+id/deleteNote"
+            android:fontFamily="@font/roboto_slab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:text="@string/Delete_this_Note"
+            android:textColor="?attr/textColor"
+            android:textSize="18sp"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            app:drawableStartCompat="@drawable/ic_delete" />
+
+        <TextView
+            android:id="@+id/copyNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            android:padding="20dp"
+            android:text="@string/Copy_this_Verse"
+            android:fontFamily="@font/roboto_slab"
+            android:textColor="?attr/textColor"
+            android:textSize="18sp"
+            app:drawableStartCompat="@drawable/ic_copy" />
+
+        <TextView
+            android:id="@+id/shareNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            android:padding="20dp"
+            android:fontFamily="@font/roboto_slab"
+            android:text="@string/Share_this_Verse"
+            android:textColor="?attr/textColor"
+            android:textSize="18sp"
+            app:drawableStartCompat="@drawable/ic_share" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

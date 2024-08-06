@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+    android:paddingBottom="12dp"
+    android:background="#B0BEC5">
+
+    <TextView
+        android:id="@+id/verse_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:padding="5dp"
+        android:fontFamily="@font/roboto_slab"
+        android:textColor="?attr/textColor"
+        android:textSize="21sp" />
+
+    <TextView
+        android:id="@+id/verse_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:padding="5dp"
+        android:fontFamily="@font/roboto_slab"
+        android:textColor="?attr/textColor"
+        android:textSize="19sp" />
+
+    <TextView
+        android:id="@+id/verse_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="?attr/highlight_two"
+        android:padding="5dp"
+        android:textColor="?attr/textColor"
+        android:textSize="19sp"
+        android:fontFamily="@font/roboto_slab"
+        android:layout_margin="10dp"
+        android:drawableStart="@drawable/ic_notelist"
+        android:drawableLeft="@drawable/ic_notelist"
+        android:drawablePadding="12dp"/>
+
+
+</LinearLayout>

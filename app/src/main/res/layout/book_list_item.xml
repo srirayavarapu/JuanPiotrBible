@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/relative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
+        <TextView
+            android:id="@+id/ivBook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle"
+            android:fontFamily="@font/roboto_slab_bold"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/nameTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@id/ivBook"
+            android:layout_toRightOf="@id/ivBook"
+            android:fontFamily="@font/roboto_slab"
+            android:padding="5dp"
+            android:text="Book 1"
+            android:textColor="?attr/textColor"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvChapterCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:textSize="12sp"
+            android:fontFamily="@font/roboto_slab"
+            android:layout_marginRight="10dp"
+            android:padding="8dp"
+            android:text="@string/capitulo_s"/>
+
+    </RelativeLayout>
+
+</FrameLayout>
