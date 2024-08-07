@@ -2,18 +2,10 @@ package com.biblia.labibliaa;
 
 import static com.biblia.labibliaa.MainActivity.OpenNavigationDrawer;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -21,25 +13,19 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.biblia.labibliaa.adapter.NoteAdapter;
 import com.biblia.labibliaa.database.DBHelper;
 import com.biblia.labibliaa.model.Note;
-
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.FullScreenContentCallback;
-import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.AdapterStatus;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.navigation.NavigationView;
 
-
 import java.util.List;
-import java.util.Map;
 
 public class NoteActivity extends AppCompatActivity {
 
@@ -50,7 +36,6 @@ public class NoteActivity extends AppCompatActivity {
     private TextView tvTheme;
 
     boolean isNight = true;
-
 
 
     @Override
@@ -64,14 +49,8 @@ public class NoteActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_note);
 
-        if (MainActivity.consentInformation.canRequestAds()) {
-
-            //BANNER ADS
-            AdView mAdView = findViewById(R.id.adView);
-            AdRequest adRequest = new AdRequest.Builder().build();
-            mAdView.loadAd(adRequest);
-        }
-
+        AdView mAdView = findViewById(R.id.adView);
+        App.getInstance().showBanner(mAdView);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(getResources().getString(R.string.Note));
@@ -104,12 +83,12 @@ public class NoteActivity extends AppCompatActivity {
         btnNightLight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isNight){
+                if (isNight) {
                     isNight = false;
                     pref.setState(true);
                     getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                     btnNightLight.setImageResource(R.drawable.ic_mode_night);
-                }else {
+                } else {
                     isNight = true;
                     pref.setState(false);
                     getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -123,10 +102,10 @@ public class NoteActivity extends AppCompatActivity {
         //Get fav name list when db exists
         List<Note> mNoteList = mDbHelper.getNotesList();
         TextView tvNoNote = findViewById(R.id.tvNoNote);
-        if (mNoteList.isEmpty()){
+        if (mNoteList.isEmpty()) {
             tvNoNote.setVisibility(View.VISIBLE);
             note_list.setVisibility(View.GONE);
-        }else {
+        } else {
             tvNoNote.setVisibility(View.GONE);
             note_list.setVisibility(View.VISIBLE);
             //init Adapter
@@ -144,7 +123,7 @@ public class NoteActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
     }

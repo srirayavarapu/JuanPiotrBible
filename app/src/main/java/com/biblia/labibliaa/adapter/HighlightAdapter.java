@@ -1,6 +1,7 @@
 package com.biblia.labibliaa.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ClipData;
@@ -16,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.biblia.labibliaa.App;
 import com.biblia.labibliaa.HighlightActivity;
 import com.biblia.labibliaa.R;
 import com.biblia.labibliaa.VerseActivity;
@@ -61,7 +63,7 @@ public class HighlightAdapter extends BaseAdapter {
         LinearLayout linearLayout = v.findViewById(R.id.linearLayout);
 
 
-        DBHelper dbHelper=new DBHelper(mContext);
+        DBHelper dbHelper = new DBHelper(mContext);
 
         Dialog dialog = new Dialog(mContext);
         dialog.setContentView(R.layout.dialog_highlight);
@@ -82,14 +84,18 @@ public class HighlightAdapter extends BaseAdapter {
                 gotoHighlight.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dialog.dismiss();
-                        Intent intent = new Intent(mContext, VerseActivity.class);
-                        intent.putExtra("book_id",mHighlightList.get(i).getBook_id());
-                        intent.putExtra("ch_no",mHighlightList.get(i).getCh_no());
-                        intent.putExtra("book_name",mHighlightList.get(i).getName());
-                        intent.putExtra("verse_no",mHighlightList.get(i).getVerse_no());
-                        mContext.startActivity(intent);
-                        //adsHandler.showInterstitial();
+                        App.getInstance().showInterstitial(((Activity) mContext), false, new App.InterstitialListener() {
+                            @Override
+                            public void onCloseInterstitial() {
+                                dialog.dismiss();
+                                Intent intent = new Intent(mContext, VerseActivity.class);
+                                intent.putExtra("book_id", mHighlightList.get(i).getBook_id());
+                                intent.putExtra("ch_no", mHighlightList.get(i).getCh_no());
+                                intent.putExtra("book_name", mHighlightList.get(i).getName());
+                                intent.putExtra("verse_no", mHighlightList.get(i).getVerse_no());
+                                mContext.startActivity(intent);
+                            }
+                        });
                     }
                 });
 
@@ -102,16 +108,16 @@ public class HighlightAdapter extends BaseAdapter {
                                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        dbHelper.highlightVerse("0",Integer.parseInt(mHighlightList.get(i).getBook_id()), Integer.parseInt(mHighlightList.get(i).getCh_no()),mHighlightList.get(i).getVerse_no(),0);
+                                        dbHelper.highlightVerse("0", Integer.parseInt(mHighlightList.get(i).getBook_id()), Integer.parseInt(mHighlightList.get(i).getCh_no()), mHighlightList.get(i).getVerse_no(), 0);
                                         mContext.startActivity(new Intent(mContext, HighlightActivity.class));
-                                        ((HighlightActivity)mContext).finish();
+                                        ((HighlightActivity) mContext).finish();
                                     }
                                 }).setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        }).create().show();
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                }).create().show();
 
                     }
                 });
@@ -121,7 +127,7 @@ public class HighlightAdapter extends BaseAdapter {
                     public void onClick(View v) {
                         ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
                         String appLink = "https://play.google.com/store/apps/details?id=" + mContext.getPackageName();
-                        String copyVerse = mHighlightList.get(i).getVerse_text() +"\n"+ mHighlightList.get(i).getName() + " " + mHighlightList.get(i).getCh_no() + " : " + mHighlightList.get(i).getVerse_no()  +"\n"+ "\n"+ appLink;
+                        String copyVerse = mHighlightList.get(i).getVerse_text() + "\n" + mHighlightList.get(i).getName() + " " + mHighlightList.get(i).getCh_no() + " : " + mHighlightList.get(i).getVerse_no() + "\n" + "\n" + appLink;
                         ClipData clip = ClipData.newPlainText("Verse", copyVerse);
                         clipboard.setPrimaryClip(clip);
                         dialog.dismiss();
@@ -133,7 +139,7 @@ public class HighlightAdapter extends BaseAdapter {
                     @Override
                     public void onClick(View v) {
                         String appLink = "https://play.google.com/store/apps/details?id=" + mContext.getPackageName();
-                        String shareVerse = mHighlightList.get(i).getVerse_text() +"\n"+ mHighlightList.get(i).getName() + " " + mHighlightList.get(i).getCh_no() + " : " + mHighlightList.get(i).getVerse_no()  +"\n"+"\n"+ appLink;
+                        String shareVerse = mHighlightList.get(i).getVerse_text() + "\n" + mHighlightList.get(i).getName() + " " + mHighlightList.get(i).getCh_no() + " : " + mHighlightList.get(i).getVerse_no() + "\n" + "\n" + appLink;
                         Intent shareIntent = new Intent(Intent.ACTION_SEND);
                         shareIntent.setType("text/plain");
                         shareIntent.putExtra(Intent.EXTRA_TEXT, shareVerse);

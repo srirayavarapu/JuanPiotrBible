@@ -2,6 +2,15 @@ package com.biblia.labibliaa;
 
 import static com.biblia.labibliaa.MainActivity.OpenNavigationDrawer;
 
+import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageButton;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -14,37 +23,16 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.annotation.SuppressLint;
-import android.content.SharedPreferences;
-import android.os.Build;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.ImageButton;
-
 import com.biblia.labibliaa.Fragments.ATFragment;
 import com.biblia.labibliaa.Fragments.AllFragment;
 import com.biblia.labibliaa.Fragments.BookFragment;
 import com.biblia.labibliaa.Fragments.NTSearchFragment;
 import com.biblia.labibliaa.database.DBHelper;
-
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.FullScreenContentCallback;
-import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.AdapterStatus;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -56,7 +44,7 @@ public class SearchActivity extends AppCompatActivity {
     NavigationView nav_view;
     DBHelper mDbHelper;
     SaveSharedPreferences pref;
-    private SharedPreferences preferences_ot,preferences_nt;
+    private SharedPreferences preferences_ot, preferences_nt;
     boolean isNight = true;
 
 
@@ -71,15 +59,9 @@ public class SearchActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_search);
 
-        if (MainActivity.consentInformation.canRequestAds()) {
-
-            //BANNER ADS
-            AdView mAdView = findViewById(R.id.adView);
-            AdRequest adRequest = new AdRequest.Builder().build();
-            mAdView.loadAd(adRequest);
-        }
-
-
+        //BANNER ADS
+        AdView mAdView = findViewById(R.id.adView);
+        App.getInstance().showBanner(mAdView);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(getResources().getString(R.string.Search));
@@ -114,12 +96,12 @@ public class SearchActivity extends AppCompatActivity {
         btnNightLight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isNight){
+                if (isNight) {
                     isNight = false;
                     pref.setState(true);
                     getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                     btnNightLight.setImageResource(R.drawable.ic_mode_night);
-                }else {
+                } else {
                     isNight = true;
                     pref.setState(false);
                     getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -143,7 +125,6 @@ public class SearchActivity extends AppCompatActivity {
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }
-
 
 
     static class ViewPagerAdapter extends FragmentPagerAdapter {

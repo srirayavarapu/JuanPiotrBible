@@ -1,6 +1,7 @@
 package com.biblia.labibliaa.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.biblia.labibliaa.App;
 import com.biblia.labibliaa.ChapterActivity;
 import com.biblia.labibliaa.R;
 import com.biblia.labibliaa.model.Book;
@@ -52,18 +54,22 @@ public class BookNameAdapter extends BaseAdapter {
         TextView tvChapterCount = v.findViewById(R.id.tvChapterCount);
 
         tvName.setText(mBookNameList.get(position).getName());
-        ivBook.setText(mBookNameList.get(position).getName().charAt(0)+"");
+        ivBook.setText(mBookNameList.get(position).getName().charAt(0) + "");
         String s = mContext.getString(R.string.capitulo_s);
-        tvChapterCount.setText(mBookNameList.get(position).getChapter_count()+" "+s);
+        tvChapterCount.setText(mBookNameList.get(position).getChapter_count() + " " + s);
         relative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, ChapterActivity.class);
-                intent.putExtra("book_id", String.valueOf(mBookNameList.get(position).getId()));
-                intent.putExtra("book_name", mBookNameList.get(position).getName());
-                intent.putExtra("category", mBookNameList.get(position).getCategory());
-                mContext.startActivity(intent);
-                //adsHandler.showInterstitial();
+                App.getInstance().showInterstitial(((Activity) mContext), false, new App.InterstitialListener() {
+                    @Override
+                    public void onCloseInterstitial() {
+                        Intent intent = new Intent(mContext, ChapterActivity.class);
+                        intent.putExtra("book_id", String.valueOf(mBookNameList.get(position).getId()));
+                        intent.putExtra("book_name", mBookNameList.get(position).getName());
+                        intent.putExtra("category", mBookNameList.get(position).getCategory());
+                        mContext.startActivity(intent);
+                    }
+                });
             }
         });
 

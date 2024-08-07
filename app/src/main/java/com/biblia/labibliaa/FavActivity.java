@@ -6,8 +6,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -16,34 +14,20 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.biblia.labibliaa.adapter.FavAdapter;
 import com.biblia.labibliaa.database.DBHelper;
 import com.biblia.labibliaa.model.Fav;
-
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.FullScreenContentCallback;
-import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.AdapterStatus;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.navigation.NavigationView;
-import androidx.lifecycle.LifecycleOwner;
-
 
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class FavActivity extends AppCompatActivity implements LifecycleOwner {
 
@@ -67,16 +51,9 @@ public class FavActivity extends AppCompatActivity implements LifecycleOwner {
         }
         setContentView(R.layout.activity_fav);
 
-
-        if (MainActivity.consentInformation.canRequestAds()) {
-
-            //BANNER ADS
-            AdView mAdView = findViewById(R.id.adView);
-            AdRequest adRequest = new AdRequest.Builder().build();
-            mAdView.loadAd(adRequest);
-        }
-
-
+        //BANNER ADS
+        AdView mAdView = findViewById(R.id.adView);
+        App.getInstance().showBanner(mAdView);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(getResources().getString(R.string.Favorite));

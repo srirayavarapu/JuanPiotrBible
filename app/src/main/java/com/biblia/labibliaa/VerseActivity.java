@@ -2,14 +2,6 @@ package com.biblia.labibliaa;
 
 import static com.biblia.labibliaa.MainActivity.OpenNavigationDrawer;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.lifecycle.LifecycleOwner;
-
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -18,45 +10,29 @@ import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import com.applovin.mediation.MaxAd;
-//import com.applovin.mediation.MaxAdListener;
-//import com.applovin.mediation.MaxAdViewAdListener;
-//import com.applovin.mediation.MaxError;
-//import com.applovin.mediation.ads.MaxAdView;
-//import com.applovin.mediation.ads.MaxInterstitialAd;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.biblia.labibliaa.adapter.VerseAdapter;
 import com.biblia.labibliaa.database.DBHelper;
 import com.biblia.labibliaa.model.Verse;
-
-import com.google.android.gms.ads.AdError;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.FullScreenContentCallback;
-import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.AdapterStatus;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.navigation.NavigationView;
-
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class VerseActivity extends AppCompatActivity {
 
@@ -77,86 +53,6 @@ public class VerseActivity extends AppCompatActivity {
     private boolean playPause, initialStage = true;
     boolean isNight = true;
 
-    //ADS
-    private static final String TAG = "VerseActivity";
-    private int retryAttempt=1;
-    public InterstitialAd mInterstitialAd;
-
-
-    public void showAd() {
-        //SHOW FULL ADS
-        if (mInterstitialAd != null) {
-            mInterstitialAd.show(this);
-        } else {
-            Log.d(TAG, "The interstitial ad wasn't ready yet.");
-//            loadAd();
-        }
-    }
-
-    public void loadAd() {
-        //RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("380750B62499D8D682916C01DF43885F"))
-        AdRequest adRequest = new AdRequest.Builder().build();
-        InterstitialAd.load(
-                this,
-                getString(R.string.admob_interstitial_id),
-                adRequest,
-                new InterstitialAdLoadCallback() {
-                    @Override
-                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                        // The mInterstitialAd reference will be null until
-                        // an ad is loaded.
-                        VerseActivity.this.mInterstitialAd = interstitialAd;
-                        if (retryAttempt == 1) {
-                            //showAd();
-                            retryAttempt++;
-                        }
-                        Log.i(TAG, "onAdLoaded");
-
-                        interstitialAd.setFullScreenContentCallback(
-                                new FullScreenContentCallback() {
-                                    @Override
-                                    public void onAdDismissedFullScreenContent() {
-                                        // Called when fullscreen content is dismissed.
-                                        // Make sure to set your reference to null so you don't
-                                        // show it a second time.
-                                        mInterstitialAd = null;
-                                        loadAd();
-                                        Log.d(TAG, "The ad was dismissed.");
-                                    }
-
-                                    @Override
-                                    public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                                        // Called when fullscreen content failed to show.
-                                        // Make sure to set your reference to null so you don't
-                                        // show it a second time.
-                                        mInterstitialAd = null;
-                                        Log.d(TAG, "The ad failed to show.");
-                                    }
-
-                                    @Override
-                                    public void onAdShowedFullScreenContent() {
-                                        // Called when fullscreen content is shown.
-                                        Log.d(TAG, "The ad was shown.");
-                                    }
-                                });
-                    }
-
-                    @Override
-                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                        // Handle the error
-                        Log.i(TAG, loadAdError.getMessage());
-                        mInterstitialAd = null;
-                        loadAd();
-
-                        @SuppressLint("DefaultLocale") String error =
-                                String.format("domain: %s, code: %d, message: %s", loadAdError.getDomain(), loadAdError.getCode(), loadAdError.getMessage());
-                        Log.i(TAG, error);
-                    }
-                });
-    }
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -168,17 +64,8 @@ public class VerseActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_verse);
 
-
-        if (MainActivity.consentInformation.canRequestAds()) {
-
-            //Ads
-            loadAd();
-            //BANNER ADS
-            AdView mAdView = findViewById(R.id.adView);
-            AdRequest adRequest = new AdRequest.Builder().build();
-            mAdView.loadAd(adRequest);
-        }
-
+        AdView mAdView = findViewById(R.id.adView);
+        App.getInstance().showBanner(mAdView);
 
         ImageButton btn_previous = findViewById(R.id.btn_previous);
         btn_play = findViewById(R.id.btn_play);
@@ -204,12 +91,12 @@ public class VerseActivity extends AppCompatActivity {
         btnNightLight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isNight){
+                if (isNight) {
                     isNight = false;
                     pref.setState(true);
                     getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                     btnNightLight.setImageResource(R.drawable.ic_mode_night);
-                }else {
+                } else {
                     isNight = true;
                     pref.setState(false);
                     getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -288,16 +175,16 @@ public class VerseActivity extends AppCompatActivity {
         //Get book name list when db exists
         mVerselist = mDbHelper.getVerseList(book_id, ch_no);
         Log.d("VERSES", String.valueOf(mVerselist));
-       // Toast.makeText(this, mVerselist.size()+" : Size", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, mVerselist.size()+" : Size", Toast.LENGTH_SHORT).show();
         //init Adapter
-        adapter = new VerseAdapter(this, mVerselist,this,fontSize);
+        adapter = new VerseAdapter(this, mVerselist, this, fontSize);
         //set adapter for listview
         verse_list.setAdapter(adapter);
-        verse_list.post( new Runnable() {
+        verse_list.post(new Runnable() {
             @Override
             public void run() {
                 //call smooth scroll
-                verse_list.setSelection(verse_no-1);
+                verse_list.setSelection(verse_no - 1);
             }
         });
 
@@ -309,7 +196,7 @@ public class VerseActivity extends AppCompatActivity {
                 if (!playPause) {
                     if (initialStage) {
                         new Player()
-                                .execute(urlPrefix + "/" + book_id + "/" + ch_no+".mp3");
+                                .execute(urlPrefix + "/" + book_id + "/" + ch_no + ".mp3");
                     } else {
                         if (!mediaPlayer.isPlaying())
                             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -318,7 +205,7 @@ public class VerseActivity extends AppCompatActivity {
                         mediaPlayer.start();
                     }
                     playPause = true;
-                }else {
+                } else {
                     if (mediaPlayer.isPlaying()) {
                         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                         btn_play.setImageResource(R.drawable.ic_play);
@@ -347,13 +234,13 @@ public class VerseActivity extends AppCompatActivity {
         btn_zoomIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (fontSize<35) {
+                if (fontSize < 35) {
                     fontSize = fontSize + 4;
                     SaveSharedPreferences.saveFontSize(getApplicationContext(), fontSize);
-                }else{
+                } else {
                     Toast.makeText(VerseActivity.this, R.string.no_zoom_message, Toast.LENGTH_LONG).show();
                 }
-                adapter = new VerseAdapter(VerseActivity.this, mVerselist,VerseActivity.this,fontSize);
+                adapter = new VerseAdapter(VerseActivity.this, mVerselist, VerseActivity.this, fontSize);
                 //set adapter for listview
                 verse_list.setAdapter(adapter);
 
@@ -363,13 +250,13 @@ public class VerseActivity extends AppCompatActivity {
         btn_zoomOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (fontSize>15) {
+                if (fontSize > 15) {
                     fontSize = fontSize - 4;
                     SaveSharedPreferences.saveFontSize(getApplicationContext(), fontSize);
-                }else{
+                } else {
                     Toast.makeText(VerseActivity.this, R.string.no_zoom_out, Toast.LENGTH_LONG).show();
                 }
-                adapter = new VerseAdapter(VerseActivity.this, mVerselist,VerseActivity.this,fontSize);
+                adapter = new VerseAdapter(VerseActivity.this, mVerselist, VerseActivity.this, fontSize);
                 //set adapter for listview
                 verse_list.setAdapter(adapter);
                 verse_list.smoothScrollToPosition(10);
@@ -377,7 +264,6 @@ public class VerseActivity extends AppCompatActivity {
             }
         });
     }
-
 
 
     @SuppressLint("StaticFieldLeak")
@@ -445,6 +331,7 @@ public class VerseActivity extends AppCompatActivity {
         }
 
     }
+
     @Override
     protected void onPause() {
         if (mediaPlayer != null) {
@@ -471,64 +358,66 @@ public class VerseActivity extends AppCompatActivity {
     }
 
     public void nextClicked() {
-        int total=mDbHelper.getChapterCount(book_id);
-        int next=ch_no+1;
+        int total = mDbHelper.getChapterCount(book_id);
+        int next = ch_no + 1;
 
-        if (next<=total) {
+        if (next <= total) {
             Intent intent = new Intent(VerseActivity.this, VerseActivity.class);
             intent.putExtra("book_id", String.valueOf(book_id));
             intent.putExtra("ch_no", String.valueOf(next));
             intent.putExtra("book_name", book_name);
-            intent.putExtra("verse_no","0");
-            intent.putExtra("category",category);
+            intent.putExtra("verse_no", "0");
+            intent.putExtra("category", category);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
-        }else {
+        } else {
             Toast.makeText(VerseActivity.this, R.string.no_more_chapters, Toast.LENGTH_LONG).show();
         }
     }
 
     public void prevClicked() {
-        if (ch_no>1) {
+        if (ch_no > 1) {
             /*showNotification(R.drawable.ic_play,ch_no-1);
             textToSpeech.stop();*/
             Intent intent = new Intent(VerseActivity.this, VerseActivity.class);
-            intent.putExtra("book_id",String.valueOf(book_id));
-            int next=ch_no-1;
-            intent.putExtra("ch_no",String.valueOf(next));
+            intent.putExtra("book_id", String.valueOf(book_id));
+            int next = ch_no - 1;
+            intent.putExtra("ch_no", String.valueOf(next));
             intent.putExtra("book_name", book_name);
-            intent.putExtra("verse_no","0");
-            intent.putExtra("category",category);
+            intent.putExtra("verse_no", "0");
+            intent.putExtra("category", category);
             startActivity(intent);
             finish();
-        }else {
-            Toast.makeText(VerseActivity.this,R.string.no_more_chapters, Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(VerseActivity.this, R.string.no_more_chapters, Toast.LENGTH_LONG).show();
         }
     }
 
-    public void updateList(){
+    public void updateList() {
         mDbHelper = new DBHelper(this);
         //Get book name list when db exists
         mVerselist = mDbHelper.getVerseList(book_id, ch_no);
         Log.d("Verse", String.valueOf(mVerselist));
         //init Adapter
-        adapter = new VerseAdapter(VerseActivity.this, mVerselist,VerseActivity.this,fontSize);
+        adapter = new VerseAdapter(VerseActivity.this, mVerselist, VerseActivity.this, fontSize);
         //set adapter for listview
         verse_list.setAdapter(adapter);
     }
 
-    public int getCh_no(){
+    public int getCh_no() {
         return ch_no;
     }
 
-    public static int getBook_id(){
+    public static int getBook_id() {
         return book_id;
     }
 
-    public int getVerse_no(){return verse_no;}
+    public int getVerse_no() {
+        return verse_no;
+    }
 
-    public String getBook_name(){
+    public String getBook_name() {
         return book_name;
     }
 }

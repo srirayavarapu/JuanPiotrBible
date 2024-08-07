@@ -28,7 +28,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.biblia.labibliaa.adapter.HighlightAdapter;
 import com.biblia.labibliaa.database.DBHelper;
 import com.biblia.labibliaa.model.Highlight;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -56,14 +55,9 @@ public class HighlightActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_highlight);
 
-        if (MainActivity.consentInformation.canRequestAds()) {
-
-            //BANNER ADS
-            AdView mAdView = findViewById(R.id.adView);
-            AdRequest adRequest = new AdRequest.Builder().build();
-            mAdView.loadAd(adRequest);
-        }
-
+        //BANNER ADS
+        AdView mAdView = findViewById(R.id.adView);
+        App.getInstance().showBanner(mAdView);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(getResources().getString(R.string.Highlight));

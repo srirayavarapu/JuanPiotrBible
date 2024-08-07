@@ -1,6 +1,7 @@
 package com.biblia.labibliaa.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ClipData;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.biblia.labibliaa.App;
 import com.biblia.labibliaa.FavActivity;
 import com.biblia.labibliaa.R;
 import com.biblia.labibliaa.VerseActivity;
@@ -60,7 +62,7 @@ public class FavAdapter extends BaseAdapter {
         LinearLayout linearLayout = v.findViewById(R.id.linearLayout);
         String appLink = "https://play.google.com/store/apps/details?id=" + mContext.getPackageName();
 
-        DBHelper dbHelper=new DBHelper(mContext);
+        DBHelper dbHelper = new DBHelper(mContext);
 
         Dialog dialog = new Dialog(mContext);
         dialog.setContentView(R.layout.dialog_fav);
@@ -81,14 +83,18 @@ public class FavAdapter extends BaseAdapter {
                 gotoFav.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dialog.dismiss();
-                        Intent intent = new Intent(mContext,VerseActivity.class);
-                        intent.putExtra("book_id",mFavList.get(i).getBook_id());
-                        intent.putExtra("ch_no",mFavList.get(i).getCh_no());
-                        intent.putExtra("book_name",mFavList.get(i).getName());
-                        intent.putExtra("verse_no",mFavList.get(i).getVerse_no());
-                        mContext.startActivity(intent);
-                        //adsHandler.showInterstitial();
+                        App.getInstance().showInterstitial(((Activity) mContext), false, new App.InterstitialListener() {
+                            @Override
+                            public void onCloseInterstitial() {
+                                dialog.dismiss();
+                                Intent intent = new Intent(mContext, VerseActivity.class);
+                                intent.putExtra("book_id", mFavList.get(i).getBook_id());
+                                intent.putExtra("ch_no", mFavList.get(i).getCh_no());
+                                intent.putExtra("book_name", mFavList.get(i).getName());
+                                intent.putExtra("verse_no", mFavList.get(i).getVerse_no());
+                                mContext.startActivity(intent);
+                            }
+                        });
                     }
                 });
 
@@ -101,16 +107,16 @@ public class FavAdapter extends BaseAdapter {
                                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        dbHelper.addAsFav(Integer.parseInt(mFavList.get(i).getBook_id()), Integer.parseInt(mFavList.get(i).getCh_no()),mFavList.get(i).getVerse_no(),0,0);
+                                        dbHelper.addAsFav(Integer.parseInt(mFavList.get(i).getBook_id()), Integer.parseInt(mFavList.get(i).getCh_no()), mFavList.get(i).getVerse_no(), 0, 0);
                                         mContext.startActivity(new Intent(mContext, FavActivity.class));
-                                        ((FavActivity)mContext).finish();
+                                        ((FavActivity) mContext).finish();
                                     }
                                 }).setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        }).create().show();
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                }).create().show();
 
                     }
                 });
@@ -120,7 +126,7 @@ public class FavAdapter extends BaseAdapter {
                     public void onClick(View v) {
                         ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
                         String appLink = "https://play.google.com/store/apps/details?id=" + mContext.getPackageName();
-                        String copyVerse = mFavList.get(i).getVerse_text() +"\n"+ mFavList.get(i).getName() + " " + mFavList.get(i).getCh_no() + " : " + mFavList.get(i).getVerse_no() +"\n"+ "\n" + appLink;
+                        String copyVerse = mFavList.get(i).getVerse_text() + "\n" + mFavList.get(i).getName() + " " + mFavList.get(i).getCh_no() + " : " + mFavList.get(i).getVerse_no() + "\n" + "\n" + appLink;
                         ClipData clip = ClipData.newPlainText("Verse", copyVerse);
                         clipboard.setPrimaryClip(clip);
                         dialog.dismiss();
@@ -132,7 +138,7 @@ public class FavAdapter extends BaseAdapter {
                     @Override
                     public void onClick(View v) {
                         String appLink = "https://play.google.com/store/apps/details?id=" + mContext.getPackageName();
-                        String shareVerse = mFavList.get(i).getVerse_text() +"\n"+ mFavList.get(i).getName() + " " + mFavList.get(i).getCh_no() + " : " + mFavList.get(i).getVerse_no() +"\n"+ "\n" + appLink;
+                        String shareVerse = mFavList.get(i).getVerse_text() + "\n" + mFavList.get(i).getName() + " " + mFavList.get(i).getCh_no() + " : " + mFavList.get(i).getVerse_no() + "\n" + "\n" + appLink;
                         Intent shareIntent = new Intent(Intent.ACTION_SEND);
                         shareIntent.setType("text/plain");
                         shareIntent.putExtra(Intent.EXTRA_TEXT, shareVerse);

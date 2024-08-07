@@ -1,6 +1,7 @@
 package com.biblia.labibliaa.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ClipData;
@@ -19,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.biblia.labibliaa.App;
 import com.biblia.labibliaa.NoteActivity;
 import com.biblia.labibliaa.R;
 import com.biblia.labibliaa.SaveSharedPreferences;
@@ -114,7 +116,7 @@ public class NoteAdapter extends BaseAdapter {
                                         mNoteList.get(i).getNo() + mNoteList.get(i).getVerse_no() + input.getText().toString());
                                 Long result = dbHelper.addNote(Integer.parseInt(mNoteList.get(i).getNo()),
                                         Integer.parseInt(mNoteList.get(i).getCh_no()), mNoteList.get(i).getVerse_no(),
-                                        input.getText().toString(),SaveSharedPreferences.getNoteNo(mContext));
+                                        input.getText().toString(), SaveSharedPreferences.getNoteNo(mContext));
 
                                 if (result != null) {
                                     Toast.makeText(mContext, R.string.note_updated, Toast.LENGTH_LONG).show();
@@ -164,17 +166,17 @@ public class NoteAdapter extends BaseAdapter {
                                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        dbHelper.addNote(Integer.parseInt(mNoteList.get(i).getNo()), Integer.parseInt(mNoteList.get(i).getCh_no()), mNoteList.get(i).getVerse_no(), null,0);
+                                        dbHelper.addNote(Integer.parseInt(mNoteList.get(i).getNo()), Integer.parseInt(mNoteList.get(i).getCh_no()), mNoteList.get(i).getVerse_no(), null, 0);
 //                                        Log.d("NG", VerseActivity.getBook_id()+"  "+ mNoteList.get(i).getCh_no()+"  "+mNoteList.get(i).getVerse_no()+"  ");
                                         mContext.startActivity(new Intent(mContext, NoteActivity.class));
                                         ((NoteActivity) mContext).finish();
                                     }
                                 }).setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        }).create().show();
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                }).create().show();
 
                     }
                 });
@@ -182,13 +184,18 @@ public class NoteAdapter extends BaseAdapter {
                 gotoNote.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dialog.dismiss();
-                        Intent intent = new Intent(mContext,VerseActivity.class);
-                        intent.putExtra("book_id",mNoteList.get(i).getNo());
-                        intent.putExtra("ch_no",mNoteList.get(i).getCh_no());
-                        intent.putExtra("book_name",mNoteList.get(i).getName());
-                        intent.putExtra("verse_no",mNoteList.get(i).getVerse_no());
-                        mContext.startActivity(intent);
+                        App.getInstance().showInterstitial(((Activity) mContext), false, new App.InterstitialListener() {
+                            @Override
+                            public void onCloseInterstitial() {
+                                dialog.dismiss();
+                                Intent intent = new Intent(mContext, VerseActivity.class);
+                                intent.putExtra("book_id", mNoteList.get(i).getNo());
+                                intent.putExtra("ch_no", mNoteList.get(i).getCh_no());
+                                intent.putExtra("book_name", mNoteList.get(i).getName());
+                                intent.putExtra("verse_no", mNoteList.get(i).getVerse_no());
+                                mContext.startActivity(intent);
+                            }
+                        });
                     }
                 });
 
@@ -197,7 +204,7 @@ public class NoteAdapter extends BaseAdapter {
                     public void onClick(View v) {
                         ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
                         String appLink = "https://play.google.com/store/apps/details?id=" + mContext.getPackageName();
-                        String copyVerse = mNoteList.get(i).getVerse_text() +"\n"+ mNoteList.get(i).getName() + " " + mNoteList.get(i).getCh_no() + " : " + mNoteList.get(i).getVerse_no()  +"\n"+"\n"+ appLink;
+                        String copyVerse = mNoteList.get(i).getVerse_text() + "\n" + mNoteList.get(i).getName() + " " + mNoteList.get(i).getCh_no() + " : " + mNoteList.get(i).getVerse_no() + "\n" + "\n" + appLink;
                         ClipData clip = ClipData.newPlainText("Verse", copyVerse);
                         clipboard.setPrimaryClip(clip);
                         dialog.dismiss();
@@ -209,7 +216,7 @@ public class NoteAdapter extends BaseAdapter {
                     @Override
                     public void onClick(View v) {
                         String appLink = "https://play.google.com/store/apps/details?id=" + mContext.getPackageName();
-                        String shareVerse = mNoteList.get(i).getVerse_text() +"\n"+ mNoteList.get(i).getName() + " " + mNoteList.get(i).getCh_no() + " : " + mNoteList.get(i).getVerse_no()  +"\n"+"\n"+ appLink;
+                        String shareVerse = mNoteList.get(i).getVerse_text() + "\n" + mNoteList.get(i).getName() + " " + mNoteList.get(i).getCh_no() + " : " + mNoteList.get(i).getVerse_no() + "\n" + "\n" + appLink;
                         Intent shareIntent = new Intent(Intent.ACTION_SEND);
                         shareIntent.setType("text/plain");
                         shareIntent.putExtra(Intent.EXTRA_TEXT, shareVerse);

@@ -2,129 +2,31 @@ package com.biblia.labibliaa;
 
 import static com.biblia.labibliaa.MainActivity.OpenNavigationDrawer;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.GridView;
 import android.widget.ImageButton;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.biblia.labibliaa.adapter.ChapterAdapter;
 import com.biblia.labibliaa.database.DBHelper;
-
-import com.google.android.gms.ads.AdError;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.FullScreenContentCallback;
-import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class ChapterActivity extends AppCompatActivity {
 
     private SaveSharedPreferences pref;
     public static String book_name, category;
     boolean isNight = true;
-
-    //ADS
-    private static final String TAG = "ChapterActivity";
-    private int retryAttempt=1;
-    public InterstitialAd mInterstitialAd;
-    boolean czyWykonano = false;
-
-
-    public void showAd() {
-        //SHOW FULL ADS
-        if (mInterstitialAd != null) {
-            mInterstitialAd.show(this);
-        } else {
-            Log.d(TAG, "The interstitial ad wasn't ready yet.");
-            loadAd();
-        }
-    }
-
-    public void loadAd() {
-        //RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("380750B62499D8D682916C01DF43885F"))
-        AdRequest adRequest = new AdRequest.Builder().build();
-
-        InterstitialAd.load(
-                this,
-                getString(R.string.admob_interstitial_id),
-                adRequest,
-                new InterstitialAdLoadCallback() {
-                    @Override
-                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                        // The mInterstitialAd reference will be null until
-                        // an ad is loaded.
-//                        mInterstitialAd = interstitialAd;
-                        ChapterActivity.this.mInterstitialAd = interstitialAd;
-                        if (!czyWykonano) {
-                            czyWykonano = true;
-                            showAd();
-                        }
-
-                        Log.i(TAG, "onAdLoaded");
-
-                        interstitialAd.setFullScreenContentCallback(
-                                new FullScreenContentCallback() {
-                                    @Override
-                                    public void onAdDismissedFullScreenContent() {
-                                        // Called when fullscreen content is dismissed.
-                                        // Make sure to set your reference to null so you don't
-                                        // show it a second time.
-                                        mInterstitialAd = null;
-                                        loadAd();
-                                        Log.d(TAG, "The ad was dismissed.");
-                                    }
-
-                                    @Override
-                                    public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                                        // Called when fullscreen content failed to show.
-                                        // Make sure to set your reference to null so you don't
-                                        // show it a second time.
-                                        mInterstitialAd = null;
-                                        Log.d(TAG, "The ad failed to show.");
-                                    }
-
-                                    @Override
-                                    public void onAdShowedFullScreenContent() {
-                                        // Called when fullscreen content is shown.
-                                        Log.d(TAG, "The ad was shown.");
-                                    }
-                                });
-                    }
-
-                    @Override
-                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                        // Handle the error
-                        Log.i(TAG, loadAdError.getMessage());
-                        mInterstitialAd = null;
-                        loadAd();
-
-                        @SuppressLint("DefaultLocale") String error =
-                                String.format("domain: %s, code: %d, message: %s", loadAdError.getDomain(), loadAdError.getCode(), loadAdError.getMessage());
-                        Log.i(TAG, error);
-                    }
-                });
-    }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,16 +39,8 @@ public class ChapterActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_chapter);
 
-
-        if (MainActivity.consentInformation.canRequestAds()) {
-
-            //Ads
-            loadAd();
-            //BANNER ADS
-            AdView mAdView = findViewById(R.id.adView);
-            AdRequest adRequest = new AdRequest.Builder().build();
-            mAdView.loadAd(adRequest);
-        }
+        AdView mAdView = findViewById(R.id.adView);
+        App.getInstance().showBanner(mAdView);
 
 
         //get value from home activity
@@ -206,12 +100,12 @@ public class ChapterActivity extends AppCompatActivity {
         btnNightLight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isNight){
+                if (isNight) {
                     isNight = false;
                     pref.setState(true);
                     getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                     btnNightLight.setImageResource(R.drawable.ic_mode_night);
-                }else {
+                } else {
                     isNight = true;
                     pref.setState(false);
                     getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -223,7 +117,6 @@ public class ChapterActivity extends AppCompatActivity {
         // EnableDayNightTheme(ChapterActivity.this,pref,tvTheme,switch_day_night);
         OpenNavigationDrawer(nav_view, ChapterActivity.this, dr, pref);
     }
-
 
 
     private boolean isOnPause = false;
