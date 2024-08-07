@@ -2,9 +2,9 @@
     <string name="app_name">Biblia Reina Valera</string>
 
     <!--    GOOGLE ADS PRODUCTION-->
-    <string name="admob_app_id" translatable="false">ca-app-pub-8465263282224422~6979230956</string>
-    <string name="admob_interstitial_id" translatable="false">ca-app-pub-8465263282224422/5757842147</string>
-    <string name="admob_banner_id" translatable="false">ca-app-pub-8465263282224422/8384005482</string>
+    <string name="admob_app_id" translatable="false">ca-app-pub-5868905259141348~4299983568</string>
+    <string name="admob_interstitial_id" translatable="false">ca-app-pub-5868905259141348/7254020785</string>
+    <string name="admob_banner_id" translatable="false">ca-app-pub-5868905259141348/7661214898</string>
     <string name="admob_native_id" translatable="false">ca-app-pub-8465263282224422/5184838875</string>
 
     <!--    Test Ads-->
